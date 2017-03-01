@@ -4,12 +4,18 @@
 //////////////////////////////////////////////////////////////////
 
 var app = require('express')().use(require('body-parser')());
-var orders = []
 
 function main(args) {
   console.log("ORDER MANAGEMENT FUNCTION")
   var text = args.text;
+  var orders = []
+  if (args.context.orders){
+    orders = args.context.orders
+  }
   orders.push(text)
-  return {payload: orders}
+  args.context.orders = orders.slice();
+  Object.assign(args, args.context)
+  return {args: args}
 };
+
 exports.handler = main;

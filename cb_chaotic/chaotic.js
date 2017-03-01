@@ -9,6 +9,8 @@ function main(args) {
   var raw = args.context.raw;
   var intents = args.context.intents.slice();
   var text = args.text;
+  console.log("ENTERING CHAOTIC MICROSERVICE")
+  console.log(JSON.stringify(args))
 
   return new Promise (function(resolve, reject){
     classify(text, raw, function(classified) {
@@ -16,7 +18,9 @@ function main(args) {
       console.log({classified: classified})
       findIntent(classified, intents, function(agent){
         console.log("FINISHED findIntent FUNCTION")
-        resolve({message: agent})
+        args.context.agent = agent;
+        Object.assign(args, args.context)
+        resolve({args: args})
       })
     })
   })
