@@ -1,0 +1,6 @@
+# Serverless
+.serverless
+.env
+node_modules
+json/agents.js
+json/platforms.js

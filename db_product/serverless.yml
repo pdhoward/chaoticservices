@@ -1,0 +1,14 @@
+# main configuration file for serverless framework
+
+service: db_product
+
+provider:
+  name: openwhisk
+
+functions:
+    getproduct:
+      handler: getproduct.handler
+
+# run npm install to download the provider plugin
+plugins:
+    - serverless-openwhisk

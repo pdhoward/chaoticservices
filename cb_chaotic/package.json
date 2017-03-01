@@ -1,0 +1,14 @@
+{
+  "name": "chaotic",
+  "version": "0.1.0",
+  "description": "A microservice which returns an agent based on intent of a message",
+  "scripts": {
+    "postinstall": "npm link serverless-openwhisk"
+  },
+  "author": "Patrick Howard",
+  "license": "MIT",
+  "dependencies": {
+	  "natural": "^0.4.0"
+
+  }
+}

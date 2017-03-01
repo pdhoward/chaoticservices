@@ -1,0 +1,13 @@
+{
+  "name": "template",
+  "version": "0.1.0",
+  "description": "Template for managing and deploying openwhisk services to bluemix",
+  "scripts": {
+    "postinstall": "npm link serverless-openwhisk"
+  },
+  "author": "Patrick Howard",
+  "license": "MIT",
+  "dependencies": {
+    "left-pad": "^1.1.3"
+  }
+}

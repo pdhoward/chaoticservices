@@ -1,0 +1,14 @@
+{
+  "name": "getproduct",
+  "version": "0.1.0",
+  "description": "A microservice which returns test product data",
+  "scripts": {
+    "postinstall": "npm link serverless-openwhisk"
+  },
+  "author": "Patrick Howard",
+  "license": "MIT",
+  "dependencies": {
+	"casual": "*"
+
+  }
+}
