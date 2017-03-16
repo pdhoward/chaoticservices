@@ -12,11 +12,13 @@ function main(args) {
   console.log("ENTERED OW MAIN FUNCTION")
   return new Promise (function(resolve, reject){
     classify(text, raw, function(classified) {
-      findIntent(classified, intents, function(agent){
+      findIntent(classified, intents, function(agent, intent){
         console.log("FINISHED findIntent FUNCTION")
-        args.context.agent = agent;
-        Object.assign(args, args.context)
-        resolve({args: args})
+        var context = {}
+        context.agent = agent;
+        context.intent = intent;
+        context.text = 'Hello from the ChaoticBot. I located your new agent '+ agent      
+        resolve(context)
       })
     })
   })
@@ -34,8 +36,9 @@ function findIntent(classified, intents, cb) {
     console.log("ENTERED OW FIND INTENT FUNCTION")
   intents.forEach(function(intent, idx, arr) {
     if (intent.intent == classified){
-      var agent = intent.agent
-      return cb({agent: agent})
+      var agent = intent.agent;
+      var intent = intent.intent;
+      return cb(agent, intent)
     }
   })
 };
