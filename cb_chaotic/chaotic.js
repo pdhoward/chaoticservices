@@ -10,6 +10,7 @@ function main(args) {
   var intents = args.system.intents.slice();
   var text = args.text;
   console.log("ENTERED OW MAIN FUNCTION")
+
   return new Promise (function(resolve, reject){
     classify(text, raw, function(classified) {
       findIntent(classified, intents, function(agent, intent){
@@ -17,7 +18,7 @@ function main(args) {
         var context = {}
         context.agent = agent;
         context.intent = intent;
-        context.text = 'Hello from the ChaoticBot. I located your new agent '+ agent      
+        context.text = 'Hello from the ChaoticBot. I located your new agent '+ agent
         resolve(context)
       })
     })
