@@ -15,11 +15,17 @@ function main(args) {
     classify(text, raw, function(classified) {
       findIntent(classified, intents, function(agent, intent){
         console.log("FINISHED findIntent FUNCTION")
-        var context = {}
-        context.agent = agent;
-        context.intent = intent;
-        context.text = 'Hello from the ChaoticBot. I located your new agent '+ agent
-        resolve(context)
+        var result = {}
+        result.sender = agent;
+        result.intent = intent;
+        result.receiver = undefined;
+        result.callback = false;
+        result.restart = false;
+        result.redirect = false;
+        result.orgmessage = undefined;
+        result.handle = undefined;
+        result.text = 'Hello from the ChaoticBot. I located your new agent '+ agent
+        resolve(result)
       })
     })
   })
