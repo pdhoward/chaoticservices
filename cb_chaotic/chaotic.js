@@ -1,8 +1,15 @@
-////////////////////////////////////////////////////////////////////
-/////////          chaotic microservice                 ///////////
+/////////////////////////////////////////////////////////////////////
+/////////          chaotic microservice                 ////////////
 ////////         uses classifier services to            ///////////
 ///////   decipher intent based on trained data set    ///////////
-//////////////////////////////////////////////////////////////////
+//////  & selects an agent associated with the intent ///////////
+////////////////////////////////////////////////////////////////
+
+// note that the ChaoticBot microservice is returns a set of properties with
+// that are part of the context API controlled by the developer
+// the platform accepts the values returned and attempts to determine the
+// the right 'next tick' in the process
+
 var natural = require('natural');
 
 function main(args) {
@@ -15,16 +22,16 @@ function main(args) {
     classify(text, raw, function(classified) {
       findIntent(classified, intents, function(agent, intent){
         console.log("FINISHED findIntent FUNCTION")
-        var result = {}
-        result.sender = agent;
+        var result = {};
+        result.sender = 'ChaoticBot';
         result.intent = intent;
         result.receiver = undefined;
         result.callback = false;
         result.restart = false;
-        result.redirect = false;
+        result.redirect = true;
         result.orgmessage = undefined;
         result.handle = undefined;
-        result.text = 'Hello from the ChaoticBot. I located your new agent '+ agent
+        result.text = '@'+ agent;
         resolve(result)
       })
     })
