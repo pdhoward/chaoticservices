@@ -1,7 +1,7 @@
 {
-  "name": "shipproduct",
+  "name": "banter",
   "version": "0.1.0",
-  "description": "A microservice for shipping products",
+  "description": "A microservice for bantering, while listening for trigger words",
   "scripts": {
     "postinstall": "npm link serverless-openwhisk"
   },
