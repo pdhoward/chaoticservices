@@ -17,28 +17,39 @@ const errorResponse = [
   'Oh oh. The Quote bot seems to be offline. Sorry'
 ]
 
+var visit = {
+  isReturn: false,
+  isKnown: false,
+  count: 0
+}
+
 function main(args) {
   console.log("BANTER")
 
   ////////////////////////////////////////////////////
   //////  Test Session Variable: New discussion?  ////
   ////////////////////////////////////////////////////
-  let req = Object.assign({}, args.system.req);
-  let clients = args.system.clients.slice();
-  let visit = {}
+
+  var req = Object.assign({}, args.system.req);
+  var clients = args.system.clients.slice();
 
   if (req.session.count) {
     visit.isReturn = true,
     visit.count = req.session.count
      }
 
-  var client = clients.filter(function( item ) {
+  var client = clients.find(function( item ) {
      return item.phone == args.sender;
    });
+  console.log({client: client})
+  console.log({sender: args.sender})
 
-  visit.name =    client.contact;
-  visit.company = client.name;
-  visit.state =   client.state;
+  if (client !== undefined) {
+      visit.isKnown = true;
+      visit.name =    client.contact;
+      visit.company = client.name;
+      visit.state =   client.state;
+  }
 
   var text = args.text;
     return new Promise (function(resolve, reject){
@@ -58,6 +69,12 @@ function main(args) {
 
 //respond returns a string
 function respond(text, cb) {
+    if (visit.isKnown) {
+      var extraText = '' + visit.name
+    } else {
+      var extraText = ' new guy';
+    }
+
     if (text.match(/quote/i)) {
         return rp
           .then(function(res){
@@ -68,13 +85,13 @@ function respond(text, cb) {
               var response = errorResponse[x];
               cb(response)
             })
-    });
+        });
     } else {
-      var response = greeting.random()
+      var greet = greeting.random()
+      var response = greet + extraText
       cb(response)
   }
 };
-
 
 function getRandomInt(min, max, cb) {
     let result = Math.floor(Math.random() * (max - min + 1)) + min;
