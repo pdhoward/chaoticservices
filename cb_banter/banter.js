@@ -17,6 +17,18 @@ const errorResponse = [
   'Oh oh. The Quote bot seems to be offline. Sorry'
 ]
 
+const triggerWords = [
+  'sale',
+  'price',
+  'pricing',
+  'training',
+  'website',
+  'product',
+  'order',
+  'buy',
+  'ship'
+]
+
 var visit = {
   isReturn: false,
   isKnown: false,
@@ -32,17 +44,18 @@ function main(args) {
 
   var req = Object.assign({}, args.system.req);
   var clients = args.system.clients.slice();
+  var text = args.text;
 
+  // test for ongoing discussion
   if (req.session.count) {
     visit.isReturn = true,
     visit.count = req.session.count
      }
 
+  // test to see if sender is registered to platform
   var client = clients.find(function( item ) {
      return item.phone == args.sender;
    });
-  console.log({client: client})
-  console.log({sender: args.sender})
 
   if (client !== undefined) {
       visit.isKnown = true;
@@ -51,8 +64,18 @@ function main(args) {
       visit.state =   client.state;
   }
 
-  var text = args.text;
-    return new Promise (function(resolve, reject){
+  // test for trigger words which redirect to another bot (microservice)
+  var trigger = triggerWords.find(function( item ) {
+      return text.match(item);
+    });
+
+  if (trigger !== undefined) {
+      visit.isTrigger = true;
+      visit.trigger = trigger;
+  }
+
+  // compose response or redirect
+  return new Promise (function(resolve, reject){
       respond(text, function(response) {
           var result = {};
           result.sender = 'Banter';
@@ -69,10 +92,18 @@ function main(args) {
 
 //respond returns a string
 function respond(text, cb) {
+
     if (visit.isKnown) {
-      var extraText = '' + visit.name
+      var extraText = ' ' + visit.name
     } else {
       var extraText = ' new guy';
+    }
+
+    if (visit.isTrigger) {
+      var TEST = ' I noted the trigger word ' + visit.trigger;
+    }
+    else {
+      var TEST = ' ';
     }
 
     if (text.match(/quote/i)) {
@@ -88,7 +119,7 @@ function respond(text, cb) {
         });
     } else {
       var greet = greeting.random()
-      var response = greet + extraText
+      var response = greet + extraText + TEST
       cb(response)
   }
 };
