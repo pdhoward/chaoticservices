@@ -32,7 +32,15 @@ const triggerWords = [
 var visit = {
   isReturn: false,
   isKnown: false,
+  isTrigger: false,
   count: 0
+}
+
+var replyObj = {
+  text: ' ',
+  callback: false,
+  redirect: false,
+  restart: false
 }
 
 function main(args) {
@@ -84,7 +92,7 @@ function main(args) {
           result.restart = false;
           result.redirect = false;
           result.orgmessage = undefined;
-          result.text = response;
+          result = Object.assign(result, response)
           resolve(result)
       })
     })
@@ -100,27 +108,30 @@ function respond(text, cb) {
     }
 
     if (visit.isTrigger) {
-      var TEST = ' I noted the trigger word ' + visit.trigger;
+      replyObj.text = '@sales';
+      replyObj.redirect = true;
+      visit.isTrigger = false;
+      cb(replyObj)
+    } else {
+      replyObj.redirect = false;
     }
-    else {
-      var TEST = ' ';
-    }
+
 
     if (text.match(/quote/i)) {
         return rp
           .then(function(res){
-            var response = res;
-            cb(response);})
+            replyObj.text = res;
+            cb(replyObj); })
           .catch(function (err) {
             getRandomInt(0, 2, function(x){
-              var response = errorResponse[x];
-              cb(response)
+              replyObj.text = errorResponse[x];
+              cb(replyObj)
             })
         });
     } else {
       var greet = greeting.random()
-      var response = greet + extraText + TEST
-      cb(response)
+      replyObj.text = greet + extraText
+      cb(replyObj)
   }
 };
 
