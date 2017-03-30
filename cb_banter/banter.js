@@ -44,7 +44,7 @@ var replyObj = {
 }
 
 function main(args) {
-  console.log("BANTER")
+  console.log("BANTER FUNCTION")
 
   ////////////////////////////////////////////////////
   //////  Test Session Variable: New discussion?  ////
@@ -86,7 +86,7 @@ function main(args) {
   return new Promise (function(resolve, reject){
       respond(text, function(response) {
           var result = {};
-          result.sender = 'Banter';
+          result.sender = 'banter';
           result.receiver = undefined;
           result.callback = false;
           result.restart = false;

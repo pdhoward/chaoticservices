@@ -1,0 +1,13 @@
+{
+  "name": "proof",
+  "version": "0.1.0",
+  "description": "A microservice for locating expertise",
+  "scripts": {
+    "postinstall": "npm link serverless-openwhisk"
+  },
+  "author": "Patrick Howard",
+  "license": "MIT",
+  "dependencies": {
+
+  }
+}

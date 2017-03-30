@@ -3,10 +3,10 @@
 ////////          sales microservices               ///////////
 //////////////////////////////////////////////////////////////////
 
-const salesResponse = [
-  'I am your sales rep. How can I help ',
-  'I can help with that. I am your sales rep ',
-  'Sounds like you need help from the sales rep '
+const proofResponse = [
+  'I am here to provide proof ',
+  'I bought that product and like it  ',
+  'Let me get someone on the phone to help you '
 ]
 
 const triggerWords = [
@@ -33,7 +33,7 @@ var replyObj = {
 
 
 function main(args) {
-  console.log("SALES FUNCTION")
+  console.log("PROOF FUNCTION")
 
     ////////////////////////////////////////////////////
     //////  Test Session Variable: New discussion?  ////
@@ -76,7 +76,6 @@ function main(args) {
       respond(text, function(response) {
           var result = {};
           result.sender = 'sales';
-          result.intent = 'buy';
           result.receiver = undefined;
           result.callback = false;
           result.restart = false;
@@ -99,19 +98,19 @@ function main(args) {
     }
 
     if (visit.isTrigger) {
-      replyObj.text = '@proof';
-      replyObj.redirect = true;
+      replyObj.text = 'I am the proof bot';
+      replyObj.redirect = false;
       replyObj.callback = false;
       visit.isTrigger = false;
       cb(replyObj)
     } else {
       replyObj.redirect = false;
-      replyObj.callback = true;
-      getRandomInt(0, 2, function(x) {
-        replyObj.text = salesResponse[x] + extraText
+      replyObj.callback = false;
+      getRandomInt(0, 2, function(x){
+        replyObj.text = errorResponse[x] + extraText
         cb(replyObj)
-     })
-   };
+    }
+  };
 }
 
 function getRandomInt(min, max, cb) {
