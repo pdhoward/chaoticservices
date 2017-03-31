@@ -4,17 +4,17 @@
 //////////////////////////////////////////////////////////////////
 
 const proofResponse = [
-  'I am here to provide proof ',
-  'I bought that product and like it  ',
-  'Let me get someone on the phone to help you '
+  'I understand you are looking for a referral. Is that true ',
+  'Would you like a referral  ',
+  'Would you like to text with one of our product advocates '
 ]
 
 const triggerWords = [
-  'proof',
-  'prove',
-  'testimony',
-  'reference',
-  'references'
+  'yes',
+  'please',
+  'absolutely',
+  'ok',
+  'do it'
 ]
 
 var visit = {
@@ -75,7 +75,7 @@ function main(args) {
   return new Promise (function(resolve, reject){
       respond(text, function(response) {
           var result = {};
-          result.sender = 'sales';
+          result.sender = 'proof';
           result.receiver = undefined;
           result.callback = false;
           result.restart = false;
@@ -92,24 +92,24 @@ function main(args) {
 //     var response = 'Hi I am your sales rep. How may I help you?'
 //     cb(response)
     if (visit.isKnown) {
-      var extraText = ' ' + visit.name
+      var extraText = ' ' + visit.name + ' ?'
     } else {
-      var extraText = ' new guy';
+      var extraText = ' new guy?';
     }
 
     if (visit.isTrigger) {
-      replyObj.text = 'I am the proof bot';
+      replyObj.text = 'Go ahead and ask your questions. Your party is now online and ready';
       replyObj.redirect = false;
       replyObj.callback = false;
       visit.isTrigger = false;
       cb(replyObj)
     } else {
       replyObj.redirect = false;
-      replyObj.callback = false;
+      replyObj.callback = true;
       getRandomInt(0, 2, function(x){
-        replyObj.text = errorResponse[x] + extraText
+        replyObj.text = proofResponse[x] + extraText
         cb(replyObj)
-    }
+    })
   };
 }
 

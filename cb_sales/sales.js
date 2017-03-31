@@ -104,13 +104,14 @@ function main(args) {
       replyObj.callback = false;
       visit.isTrigger = false;
       cb(replyObj)
-    } else {
+      }
+      else {
       replyObj.redirect = false;
       replyObj.callback = true;
       getRandomInt(0, 2, function(x) {
         replyObj.text = salesResponse[x] + extraText
         cb(replyObj)
-     })
+      })
    };
 }
 
