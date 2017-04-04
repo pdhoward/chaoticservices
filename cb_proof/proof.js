@@ -172,7 +172,7 @@ function main(args) {
       replyObj.text = 'Go ahead and ask your questions. Your party is now online and ready. Enter ! to end session';
       replyObj.redirect = false;
       replyObj.callback = true;
-      replyObj.proof = true;     // set proof to true and being passing messages to designated agent
+      replyObj.proof = true;     // set proof to true and begin passing messages to designated agent
       visit.isTrigger = false;
       cb(replyObj)
     } else {
