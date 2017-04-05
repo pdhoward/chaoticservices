@@ -23,15 +23,18 @@ function main(args) {
       findIntent(classified, intents, function(agent, intent){
         console.log("FINISHED findIntent FUNCTION")
         var result = {};
+        var newAgent = '@' + agent;
         result.sender = 'ChaoticBot';
         result.intent = intent;
         result.receiver = undefined;
         result.callback = false;
         result.restart = false;
-        result.redirect = true;
+        result.redirect = {
+          agent: newAgent          
+        };
         result.orgmessage = undefined;
         result.handle = undefined;
-        result.text = '@'+ agent;
+        result.text = 'Chaotic is redirecting';
         resolve(result)
       })
     })

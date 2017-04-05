@@ -3,34 +3,22 @@
 ////////          sales microservices               ///////////
 //////////////////////////////////////////////////////////////////
 
-const proofResponse = [
-  'I understand you are looking for a referral. Is that true ',
-  'Would you like a referral ',
-  'Would you like to text with one of our product advocates '
+const avatarResponse = [
+  'I am the avatar ',
+  'I am the avataer here to set up live sessions  ',
+  'Let us start your live session  '
 ]
 
+
+// REFACTOR -- testing using a way to restart dialogue
 const triggerWords = [
-  'yes',
-  'please',
-  'absolutely',
-  'ok',
-  'do it',
   'Yes',
-  'Please',
-  'Absolutely',
-  'Ok',
-  'Go',
-  'Do'
+  'yes'
 ]
 
-var proofAgent = {
-  live: '+19145271623'
-}
 
 // REFACTOR - select proofagent based on criteria
 var visit = {
-  sender: '',
-  receiver: proofAgent.live,
   isReturn: false,
   isKnown: false,
   isTrigger: false,
@@ -38,7 +26,6 @@ var visit = {
 }
 
 var replyObj = {
-  text: ' ',
   callback: false,
   redirect: {},
   restart: false
@@ -46,13 +33,15 @@ var replyObj = {
 
 
 function main(args) {
-  console.log("PROOF FUNCTION")
+  console.log("AVATAR FUNCTION")
 
   Object.getOwnPropertyNames(args).forEach(
         function (val, idx, array) {
             if ((val !== 'system') && (val !== 'handler')) {
                   console.log(val + ' -> ' + args[val]); }
             if (val == 'context') {
+                  console.log(val + ' -> ' + JSON.stringify(args[val])); }
+            if (val == 'bot') {
                   console.log(val + ' -> ' + JSON.stringify(args[val])); }
                 }
             );
@@ -65,7 +54,10 @@ function main(args) {
     var clients = args.system.clients.slice();
     var text = args.text;
     // record number of sender
-    visit.sender = args.sender
+//    visit.agent = args.context.redirect.agent
+//    visit.sender = args.context.redirect.sender
+//    visit.receiver - args.context.redirect.receiver
+
 
 // test for ongoing dialogue
     if (req.session.count) {
@@ -86,20 +78,23 @@ function main(args) {
     }
 
 // test for trigger words which redirect to another bot for live chat (microservice)
-    var trigger = triggerWords.find(function( item ) {
+  var trigger = triggerWords.find(function( item ) {
         return text.match(item);
-      });
+    });
 
   if (trigger !== undefined) {
       visit.isTrigger = true;
       visit.trigger = trigger;
     }
 
-  // compose response and determine callback
+// DEBUG MODE
+  console.log ({visit: JSON.stringify(visit)})
+
+// compose response and determine callback
   return new Promise (function(resolve, reject){
       respond(args, function(response) {
           var result = {};
-          result.sender = 'proof';
+          result.sender = 'avatar';
           result.receiver = undefined;
           result.callback = false;
           result.restart = false;
@@ -116,19 +111,19 @@ function main(args) {
 //     var response = 'Hi I am your sales rep. How may I help you?'
 //     cb(response)
     if (visit.isKnown) {
-      var extraText = ' ' + visit.name + '?'
+      var extraText = ' ' + visit.name + ' ?'
     } else {
       var extraText = ' new guy?';
     }
 
     if (visit.isTrigger) {
-        var newAgent = '@avatar'
-        replyObj.text = 'Proof bot redirecting to an avatar';
+
+        replyObj.text = 'ending live session';
         replyObj.redirect = {
-            agent: newAgent,
-            sender: visit.sender,
-            receiver: visit.receiver,
-            greeting: 'Our product advocate is online. Go ahead and ask your question. Enter ! to end the session'
+            agent: undefined,
+            sender: undefined,
+            receiver: undefined,
+            greeting: ''
           };
         replyObj.callback = false;
         visit.isTrigger = false;

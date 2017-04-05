@@ -39,12 +39,12 @@ var visit = {
 var replyObj = {
   text: ' ',
   callback: false,
-  redirect: false,
+  redirect: {},
   restart: false
 }
 
 function main(args) {
-  console.log("BANTER FUNCTION")
+  console.log("NEW BANTER FUNCTION")
 
   ////////////////////////////////////////////////////
   //////  Test Session Variable: New discussion?  ////
@@ -90,9 +90,11 @@ function main(args) {
           result.receiver = undefined;
           result.callback = false;
           result.restart = false;
-          result.redirect = false;
+          result.redirect = {};
           result.orgmessage = undefined;
           result = Object.assign(result, response)
+          console.log("DEBUG BANTER RESULT")
+          console.log(JSON.stringify(result))
           resolve(result)
       })
     })
@@ -108,12 +110,15 @@ function respond(text, cb) {
     }
 
     if (visit.isTrigger) {
-      replyObj.text = '@sales';
-      replyObj.redirect = true;
+      var newAgent = '@sales';
+      replyObj.text = 'Banter is redirecting';
+      replyObj.redirect = {
+        agent: newAgent           
+      };
       visit.isTrigger = false;
       cb(replyObj)
     } else {
-      replyObj.redirect = false;
+      replyObj.redirect = {};
     }
 
 

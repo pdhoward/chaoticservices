@@ -27,7 +27,7 @@ var visit = {
 var replyObj = {
   text: ' ',
   callback: false,
-  redirect: false,
+  redirect: {},
   restart: false
 }
 
@@ -80,7 +80,7 @@ function main(args) {
           result.receiver = undefined;
           result.callback = false;
           result.restart = false;
-          result.redirect = false;
+          result.redirect = {};
           result.orgmessage = undefined;
           result = Object.assign(result, response)
           resolve(result)
@@ -90,8 +90,6 @@ function main(args) {
 
   //respond returns a string
   function respond(text, cb) {
-//     var response = 'Hi I am your sales rep. How may I help you?'
-//     cb(response)
     if (visit.isKnown) {
       var extraText = ' ' + visit.name
     } else {
@@ -99,14 +97,17 @@ function main(args) {
     }
 
     if (visit.isTrigger) {
-      replyObj.text = '@proof';
-      replyObj.redirect = true;
+      var newAgent = '@proof'
+      replyObj.text = 'This is Sales bot redirecting';
+      replyObj.redirect = {
+        agent: newAgent      
+      };
       replyObj.callback = false;
       visit.isTrigger = false;
       cb(replyObj)
       }
       else {
-      replyObj.redirect = false;
+      replyObj.redirect = {};
       replyObj.callback = true;
       getRandomInt(0, 2, function(x) {
         replyObj.text = salesResponse[x] + extraText
