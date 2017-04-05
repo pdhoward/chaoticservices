@@ -3,17 +3,10 @@
 ////////          sales microservices               ///////////
 //////////////////////////////////////////////////////////////////
 
-const avatarResponse = [
-  'I am the avatar ',
-  'I am the avataer here to set up live sessions  ',
-  'Let us start your live session  '
-]
-
-
 // REFACTOR -- testing using a way to restart dialogue
 const triggerWords = [
-  'Yes',
-  'yes'
+  'Stop',
+  'stop'
 ]
 
 
@@ -53,10 +46,23 @@ function main(args) {
     var req = Object.assign({}, args.system.req);
     var clients = args.system.clients.slice();
     var text = args.text;
-    // record number of sender
-//    visit.agent = args.context.redirect.agent
-//    visit.sender = args.context.redirect.sender
-//    visit.receiver - args.context.redirect.receiver
+    visit.greeting = 'Hello. Your party is now online. Please go ahead'
+
+// record number of sender and receiver on redirect
+    var redirect = args.bot.redirect
+    if (notEmptyObject(redirect) ) {
+      visit.agent = args.bot.redirect.agent;
+      visit.sender = args.bot.redirect.sender;
+      visit.receiver = args.bot.redirect.receiver;
+      visit.greeting = args.bot.redirect.greeting;
+
+    } else{
+
+     console.log ("AVATAR REDIRECT OBJECT EMPTY")
+     // probably do a call to mongo to find text numbers
+     // or how does this work on subsequent cycles ///
+    }
+
 
 
 // test for ongoing dialogue
@@ -108,23 +114,13 @@ function main(args) {
 
   //respond returns a string
   function respond(args, cb) {
-//     var response = 'Hi I am your sales rep. How may I help you?'
-//     cb(response)
     if (visit.isKnown) {
-      var extraText = ' ' + visit.name + ' ?'
-    } else {
-      var extraText = ' new guy?';
+      var extraText = ' ' + visit.name;
     }
 
     if (visit.isTrigger) {
-
         replyObj.text = 'ending live session';
-        replyObj.redirect = {
-            agent: undefined,
-            sender: undefined,
-            receiver: undefined,
-            greeting: ''
-          };
+        replyObj.redirect = {};
         replyObj.callback = false;
         visit.isTrigger = false;
         visit.trigger = '';
@@ -134,16 +130,20 @@ function main(args) {
       {
         replyObj.redirect = {};
         replyObj.callback = true;
-        getRandomInt(0, 2, function(x){
-        replyObj.text = proofResponse[x] + extraText
+        replyObj.text = visit.greeting + extraText
         cb(replyObj)
-    })
+      }
   };
 }
 
-function getRandomInt(min, max, cb) {
-    let result = Math.floor(Math.random() * (max - min + 1)) + min;
-    return cb(result);
+
+function notEmptyObject(obj) {
+    for (var key in obj) {
+      if (Object.prototype.hasOwnProperty.call(obj, key)) {
+        return true;
+      }
+    }
+    return false;
   }
 
 exports.handler = main;
