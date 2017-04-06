@@ -56,7 +56,7 @@ function main(args) {
       visit.receiver = args.bot.redirect.receiver;
       visit.greeting = args.bot.redirect.greeting;
 
-    } else{
+    } else {
 
      console.log ("AVATAR REDIRECT OBJECT EMPTY")
      // probably do a call to mongo to find text numbers
@@ -110,40 +110,36 @@ function main(args) {
           resolve(result)
       })
     })
-  };
+};
 
-  //respond returns a string
-  function respond(args, cb) {
-    if (visit.isKnown) {
+//respond returns a string
+function respond(args, cb) {
+  if (visit.isKnown) {
       var extraText = ' ' + visit.name;
+  }
+
+  if (visit.isTrigger) {
+      replyObj.text = 'ending live session';
+      replyObj.redirect = {};
+      replyObj.callback = false;
+      visit.isTrigger = false;
+      visit.trigger = '';
+      cb(replyObj)
     }
-
-    if (visit.isTrigger) {
-        replyObj.text = 'ending live session';
-        replyObj.redirect = {};
-        replyObj.callback = false;
-        visit.isTrigger = false;
-        visit.trigger = '';
-        cb(replyObj)
-      }
-    else
-      {
-        replyObj.redirect = {};
-        replyObj.callback = true;
-        replyObj.text = visit.greeting + extraText
-        cb(replyObj)
-      }
+  else
+    {
+      replyObj.redirect = {};
+      replyObj.callback = true;
+      replyObj.text = visit.greeting + extraText
+      cb(replyObj)
+    }
   };
-}
-
 
 function notEmptyObject(obj) {
-    for (var key in obj) {
-      if (Object.prototype.hasOwnProperty.call(obj, key)) {
-        return true;
-      }
-    }
-    return false;
+ if ( (typeof obj === 'object') &&  (obj !== null ) ) {
+   return true
   }
+    return false;
+}
 
 exports.handler = main;
