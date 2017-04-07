@@ -48,22 +48,13 @@ function main(args) {
     var text = args.text;
     visit.greeting = 'Hello. Your party is now online. Please go ahead'
 
-// record number of sender and receiver on redirect
-    var redirect = args.bot.redirect
-    if (notEmptyObject(redirect) ) {
-      visit.agent = args.bot.redirect.agent;
-      visit.sender = args.bot.redirect.sender;
-      visit.receiver = args.bot.redirect.receiver;
-      visit.greeting = args.bot.redirect.greeting;
-
-    } else {
-
-     console.log ("AVATAR REDIRECT OBJECT EMPTY")
-     // probably do a call to mongo to find text numbers
-     // or how does this work on subsequent cycles ///
+// toggle sender and receiver for live session
+    if (args.agentonelive == args.sender) {
+      replyObj.togglesender = args.agenttwolive
     }
-
-
+    if (args.agenttwolive == args.sender) {
+      replyObj.togglesender = args.agentonelive
+    }
 
 // test for ongoing dialogue
     if (req.session.count) {
@@ -101,6 +92,7 @@ function main(args) {
       respond(args, function(response) {
           var result = {};
           result.sender = 'avatar';
+          result.intent = 'live';
           result.receiver = undefined;
           result.callback = false;
           result.restart = false;
@@ -130,16 +122,10 @@ function respond(args, cb) {
     {
       replyObj.redirect = {};
       replyObj.callback = true;
-      replyObj.text = visit.greeting + extraText
+      replyObj.text = args.text
       cb(replyObj)
     }
   };
 
-function notEmptyObject(obj) {
- if ( (typeof obj === 'object') &&  (obj !== null ) ) {
-   return true
-  }
-    return false;
-}
 
 exports.handler = main;
