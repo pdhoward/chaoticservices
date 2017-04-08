@@ -128,7 +128,7 @@ function main(args) {
             agent: newAgent,
             sender: visit.sender,
             receiver: visit.receiver,
-            greeting: 'Our product advocate is online. Go ahead and ask your question. Enter ! to end the session'
+            greeting: 'Our product advocate is online. Go ahead and ask your question. Enter BYE to end the session'
           };
         replyObj.callback = false;
         visit.isTrigger = false;

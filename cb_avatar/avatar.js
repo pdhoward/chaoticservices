@@ -5,8 +5,7 @@
 
 // REFACTOR -- testing using a way to restart dialogue
 const triggerWords = [
-  'Bye',
-  'bye'
+  'BYE'
 ]
 
 
@@ -114,6 +113,7 @@ function respond(args, cb) {
       replyObj.text = 'ending live session';
       replyObj.redirect = {};
       replyObj.callback = false;
+      result.restart = true;
       visit.isTrigger = false;
       visit.trigger = '';
       cb(replyObj)
