@@ -5,8 +5,8 @@
 
 // REFACTOR -- testing using a way to restart dialogue
 const triggerWords = [
-  'Stop',
-  'stop'
+  'Bye',
+  'bye'
 ]
 
 
