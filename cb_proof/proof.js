@@ -113,8 +113,6 @@ function main(args) {
 
   //respond returns a string
   function respond(args, cb) {
-//     var response = 'Hi I am your sales rep. How may I help you?'
-//     cb(response)
     if (visit.isKnown) {
       var extraText = ' ' + visit.name + '?'
     } else {
