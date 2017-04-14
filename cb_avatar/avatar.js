@@ -113,7 +113,7 @@ function respond(args, cb) {
       replyObj.text = 'ending live session';
       replyObj.redirect = {};
       replyObj.callback = false;
-      result.restart = true;
+      replyObj.restart = true;
       visit.isTrigger = false;
       visit.trigger = '';
       cb(replyObj)
@@ -122,6 +122,7 @@ function respond(args, cb) {
     {
       replyObj.redirect = {};
       replyObj.callback = true;
+      replyObj.restart = false;
       replyObj.text = args.text
       cb(replyObj)
     }
