@@ -14,7 +14,7 @@ var visit = {
   isReturn: false,
   isKnown: false,
   isTrigger: false,
-  count: 0
+  count: 1
 }
 
 var replyObj = {
@@ -38,28 +38,38 @@ function main(args) {
                 }
             );
 
-    ////////////////////////////////////////////////////
-    //////  Test Session Variable: New discussion?  ////
+    //////////////////////////////////////////////////////
+    //////       Restore Session Variables           ////
     ////////////////////////////////////////////////////
 
     var req = Object.assign({}, args.system.req);
-    var clients = args.system.clients.slice();
-    var text = args.text;
-    visit.greeting = 'Hello. Your party is now online. Please go ahead'
+    var clients =     args.system.clients.slice();
+    var text =        args.text;
+    visit.greeting =  args.context.redirect.greeting;
+    visit.sender =    args.context.redirect.sender;
+    visit.receiver =  args.context.redirect.receiver;
 
 // toggle sender and receiver for live session
-    if (args.agentonelive == args.sender) {
-      replyObj.togglesender = args.agenttwolive
+    if (visit.sender == args.sender) {
+      replyObj.togglesender = visit.receiver
     }
-    if (args.agenttwolive == args.sender) {
-      replyObj.togglesender = args.agentonelive
+    if (visit.receiver == args.sender) {
+      replyObj.togglesender = visit.sender
     }
 
-// test for ongoing dialogue
-    if (req.session.count) {
+// test for return visit
+    if (args.context.redirect.count) {
       visit.isReturn = true,
-      visit.count = req.session.count
+      visit.count = args.context.redirect.count + 1
        }
+
+// on first time pass back an opening greeting to the original sender
+    if (visit.count == 1) {
+      visit.text = visit.greeting;
+      replyObj.togglesender = visit.sender
+    } else {
+      visit.text = args.text
+    }
 
 // test to see if sender is registered to platform
     var client = clients.find(function( item ) {
@@ -103,7 +113,8 @@ function main(args) {
     })
 };
 
-//respond returns a string
+// respond returns a string. Note that with avatar it redirects to itself,
+// so it can toggle receiver and sender and pass itself a visit count
 function respond(args, cb) {
   if (visit.isKnown) {
       var extraText = ' ' + visit.name;
@@ -120,10 +131,16 @@ function respond(args, cb) {
     }
   else
     {
-      replyObj.redirect = {};
+      var thisAgent = '@avatar'
+      replyObj.redirect = {
+          agent: thisAgent,
+          sender: visit.sender,
+          receiver: visit.receiver,
+          count: visit.count
+        };
       replyObj.callback = true;
       replyObj.restart = false;
-      replyObj.text = args.text
+      replyObj.text = visit.text
       cb(replyObj)
     }
   };
