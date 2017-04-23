@@ -48,12 +48,13 @@ function main(args) {
     visit.greeting =  args.context.redirect.greeting;
     visit.sender =    args.context.redirect.sender;
     visit.receiver =  args.context.redirect.receiver;
+    visit.texter =    args.context.togglesender;
 
 // toggle sender and receiver for live session
-    if (visit.sender == args.sender) {
+    if (visit.texter == visit.sender) {
       replyObj.togglesender = visit.receiver
     }
-    if (visit.receiver == args.sender) {
+    if (visit.texter == visit.receiver) {
       replyObj.togglesender = visit.sender
     }
 
