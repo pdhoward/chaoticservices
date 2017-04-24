@@ -24,13 +24,14 @@ const triggerWords = [
 ]
 
 var proofAgent = {
-  live: '+19145271623'
+  lah: '+19145271623',
+  pdh: '+19145005391'
 }
 
 // REFACTOR - select proofagent based on criteria
 var visit = {
   sender: '',
-  receiver: proofAgent.live,
+  receiver: proofAgent.pdh,
   isReturn: false,
   isKnown: false,
   isTrigger: false,
@@ -66,6 +67,12 @@ function main(args) {
     var text = args.text;
     // record number of sender
     visit.sender = args.sender
+
+    // For Testing Purposes
+    // if sender is equal to the proof agent, switch proof agents
+    if (visit.sender == visit.receiver) {
+      visit.receiver = proofAgent.lah
+    }
 
 // test for ongoing dialogue
     if (req.session.count) {
@@ -129,6 +136,7 @@ function main(args) {
             greeting: 'Our product advocate is online. Go ahead and ask your question. Enter BYE to end the session'
           };
         replyObj.callback = false;
+        replyObj.restart = false;
         visit.isTrigger = false;
         visit.trigger = '';
         cb(replyObj)
