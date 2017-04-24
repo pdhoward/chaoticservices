@@ -72,6 +72,8 @@ function main(args) {
     // if sender is equal to the proof agent, switch proof agents
     if (visit.sender == visit.receiver) {
       visit.receiver = proofAgent.lah
+    } else {
+      visit.receiver = proofAgent.pdh
     }
 
 // test for ongoing dialogue
@@ -139,6 +141,8 @@ function main(args) {
         replyObj.restart = false;
         visit.isTrigger = false;
         visit.trigger = '';
+        console.log("DEBUG TRIGGER")
+        console.log({visit: visit})
         cb(replyObj)
       }
     else
@@ -147,6 +151,8 @@ function main(args) {
         replyObj.callback = true;
         getRandomInt(0, 2, function(x){
         replyObj.text = proofResponse[x] + extraText
+        console.log("DEBUG PROOF BANTER")
+        console.log({visit: visit})
         cb(replyObj)
     })
   };
