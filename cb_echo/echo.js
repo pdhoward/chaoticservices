@@ -2,8 +2,17 @@
 /////////          chaotic microservice                 ///////////
 ////////             echo and direct                 ///////////
 //////////////////////////////////////////////////////////////////
-var greeting = require('greeting');
+var greeting =  require('greeting');
 const request = require('request-promise');
+const redis =   require('socket.io-redis');
+const microport = require('/microchat');
+
+const REDIS_URI='redis-15416.c12.us-east-1-4.ec2.cloud.redislabs.com'
+const REDIS_PORT= '15146'
+const port = microport()
+var io = require('socket.io')(port);
+
+io.adapter(redis({ host: REDIS_URI, port: REDIS_PORT }));
 
 const rp = request({
   uri: 'http://api.forismatic.com/api/1.0/?method=getQuote&format=text&lang=en',
@@ -38,10 +47,15 @@ var visit = {
 
 
 function main(args) {
-  console.log("NEW EXCHO FUNCTION")
+  console.log("NEW ECHO FUNCTION")
 
   var text = args.newMSG.text;
 
+  // experimenting with sockets
+  io.of('/').adapter.allRooms(function (err, rooms) {
+  console.log(rooms);
+    });
+  io.of('/').adapter.on('error', function(){console.log('pub error')});
 
   // test for trigger words which redirect to another bot (microservice)
   var trigger = triggerWords.find(function( item ) {

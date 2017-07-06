@@ -1,0 +1,10 @@
+
+
+
+github deployer for openwhisk actions
+
+https://github.com/adobe-apiplatform/openwhisk-github-deployer#deploying-an-action-using-github-deployer
+
+---------------------
+
+https://www.raymondcamden.com/2017/06/02/integrating-openwhisk-with-your-node-application/
