@@ -8,6 +8,6 @@
   "author": "Patrick Howard",
   "license": "MIT",
   "dependencies": {
-    "socket.io-redis": "*"
+    "greeting": "1.0.6"
   }
 }
