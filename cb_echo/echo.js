@@ -41,6 +41,7 @@ var visit = {
 
 
 function main(args) {
+
   console.log("NEW ECHO FUNCTION")
 
   var text = args.text;
