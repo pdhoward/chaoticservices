@@ -43,8 +43,9 @@ var visit = {
 function main(args) {
 
   console.log("NEW ECHO FUNCTION")
-
-  var text = args.text;
+  console.log(args)
+  // REFACTOR
+  var text = "product";
 
   // test for trigger words which redirect to another bot (microservice)
   var trigger = triggerWords.find(function( item ) {
