@@ -73,7 +73,7 @@ function main(args) {
 
 //respond returns a string
 function respond(args, cb) {
-   let reply = 'Hey - we have spoken ' + args.machine.iteration + ' times > ' + args.message.Body};
+   let reply = 'Hey - we have spoken ' + args.machine.iteration + ' times > ' + args.message.Body;
 
    cb(reply)
 
