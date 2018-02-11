@@ -39,12 +39,14 @@ var visit = {
   count: 0
 }
 
+// NOTE -- etire interact object is being passed to the microservice
 
 function main(args) {
 
   console.log("NEW ECHO FUNCTION")
-  console.log(args)
-  // REFACTOR
+  console.log(args.message.Body)  
+  console.log(args.machine.iteration)
+
   var text = "product";
 
   // test for trigger words which redirect to another bot (microservice)
@@ -59,7 +61,7 @@ function main(args) {
 
   // compose response or redirect
   return new Promise (function(resolve, reject){
-      respond(text, function(response) {
+      respond(args, function(response) {
           var result = {};
           result.sender = 'echo';
           result.orgmessage = args;
@@ -70,9 +72,9 @@ function main(args) {
   };
 
 //respond returns a string
-function respond(text, cb) {
+function respond(args, cb) {
+   let reply = 'Hey - we have spoken ' + args.machine.iteration ' times > ' + args.message.Body};
 
-   let reply = 'I think you said ' + text;
    cb(reply)
 
 };
