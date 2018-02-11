@@ -44,7 +44,7 @@ var visit = {
 function main(args) {
 
   console.log("NEW ECHO FUNCTION")
-  console.log(args.message.Body)  
+  console.log(args.message.Body)
   console.log(args.machine.iteration)
 
   var text = "product";
@@ -73,7 +73,7 @@ function main(args) {
 
 //respond returns a string
 function respond(args, cb) {
-   let reply = 'Hey - we have spoken ' + args.machine.iteration ' times > ' + args.message.Body};
+   let reply = 'Hey - we have spoken ' + args.machine.iteration + ' times > ' + args.message.Body};
 
    cb(reply)
 
