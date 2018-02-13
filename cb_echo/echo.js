@@ -65,9 +65,9 @@ function main(args) {
           result.orgmessage = args;
           result.reply = []
           result.reply.push(response)
-          result.reply.push({'link': 'http://www.example.com/'})
+        //  result.reply.push({'link': 'http://www.example.com/'})
+          console.log(result.reply)
           resolve(result)
-          result.reply = []
       })
     })
   };
