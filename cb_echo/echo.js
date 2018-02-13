@@ -43,7 +43,7 @@ var visit = {
 
 function main(args) {
 
-  console.log("NEW ECHO FUNCTION")  
+  console.log("NEW ECHO FUNCTION")
 
   var text = "product";
 
@@ -60,12 +60,12 @@ function main(args) {
   // compose response or redirect
   return new Promise (function(resolve, reject){
       respond(args, function(response) {
-          var result = {};
+          let result = {};
           result.sender = 'echo';
           result.orgmessage = args;
           result.reply = []
           result.reply.push(response)
-          result.reply.push({link: "http://www.example.com/"})
+          result.reply.push({'link': 'http://www.example.com/'})
           resolve(result)
           result.reply = []
       })
@@ -74,7 +74,7 @@ function main(args) {
 
 //respond returns a string
 function respond(args, cb) {
-   let reply = {msg:'Hey - we have spoken ' + args.machine.iteration + ' times > ' + args.message.Body};
+   let reply = {'msg':'Hey - we have spoken ' + args.machine.iteration + ' times > ' + args.message.Body};
 
    cb(reply)
 
