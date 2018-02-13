@@ -43,9 +43,7 @@ var visit = {
 
 function main(args) {
 
-  console.log("NEW ECHO FUNCTION")
-  console.log(args.message.Body)
-  console.log(args.machine.iteration)
+  console.log("NEW ECHO FUNCTION")  
 
   var text = "product";
 
