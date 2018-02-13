@@ -65,15 +65,18 @@ function main(args) {
           var result = {};
           result.sender = 'echo';
           result.orgmessage = args;
-          result.reply = response;
+          result.reply = []
+          result.reply.push(response)
+          result.reply.push({link: "http://www.example.com/"})
           resolve(result)
+          result.reply = []
       })
     })
   };
 
 //respond returns a string
 function respond(args, cb) {
-   let reply = 'Hey - we have spoken ' + args.machine.iteration + ' times > ' + args.message.Body;
+   let reply = {msg:'Hey - we have spoken ' + args.machine.iteration + ' times > ' + args.message.Body};
 
    cb(reply)
 
