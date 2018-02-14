@@ -74,7 +74,7 @@ function main(args) {
 
 //respond returns a string
 function respond(args, cb) {
-   let reply = {'msg':'Hey - we have spoken ' + args.machine.iteration + ' times > ' + args.message.Body};
+   let reply = {'msg':'Hi I am ' + args.agent.name + ' On iteration ' + args.machine.iteration + ' you texted ' + args.message.Body};
 
    cb(reply)
 
