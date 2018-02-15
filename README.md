@@ -19,6 +19,8 @@ However, only the response object sent by the platform will be recorded and made
 2. a response object is an array of objects. Each object within the array is a single key value pair
 3. a key of link -- will assume the link is a valid url and pass it accordingly on the web
 4. a key of image -- will text the image using mms
+5. services need to be web enabled as an action
+6. need rate limiting .. auth services 
 
 # Building State Machines
 1. a state machine is a JSON object, with each property representing a simple function
