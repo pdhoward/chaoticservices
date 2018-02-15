@@ -20,6 +20,11 @@ However, only the response object sent by the platform will be recorded and made
 3. a key of link -- will assume the link is a valid url and pass it accordingly on the web
 4. a key of image -- will text the image using mms
 
+# Building State Machines
+1. a state machine is a JSON object, with each property representing a simple function
+2. a state machine can have as many states as needed
+3. all state machine sequences have to terminate with the state of END  -- this signals to the platform that the final state has been reached and to terminate the active dialogue
+
 # Deploying microservices
 
 1. implement serviceless framework
