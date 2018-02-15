@@ -15,4 +15,6 @@ The sequence cannot be anticipated, although all information visible on the plat
 However, only the response object sent by the platform will be recorded and made available to the same or next microservice executed in within a dialogue
 
 1. each service is rigidly structured (highly opinionated) on the format of the data object received and sent
-2. 
+2. a response object is an array of objects. Each object within the array is a single key value pair
+3. a key of link -- will assume the link is a valid url and pass it accordingly on the web
+4. a key of image -- will text the image using mms
