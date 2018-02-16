@@ -65,7 +65,7 @@ function main(args) {
           result.orgmessage = args;
           result.reply = []
           result.reply.push(response)
-          let msg2 = {"msg2":' Message ' + args.message.Body + ' Sender ' + args.intent.response.sender + ' Response ' + args.intent.response.reply}
+          let msg2 = {"msg2":' Message ' + args.message.Body + ' Next State ' + args.machine.state }
           result.reply.push(msg2)
         //  result.reply.push({'link': 'http://www.example.com/'})
           console.log(result.reply)
