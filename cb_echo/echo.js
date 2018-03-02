@@ -65,7 +65,13 @@ function main(args) {
           result.orgmessage = args;
           result.reply = []
           result.reply.push(response)
-          let msg2 = {"msg2":' Message ' + args.message.Body + ' Next State ' + args.machine.state }
+          let msg2 = {}
+          let nextSlot = args.machine.thisSlot + 1
+          if (nextSlot == args.agent.skills.length) {
+              msg2 = {"msg2":' Message ' + args.message.Body + ' This agent has nothing more to say' }
+            } else [
+              msg2 = {"msg2":' Message ' + args.message.Body + ' Next Skill ' + args.agent.skills[nextSlot]}
+            ]
           result.reply.push(msg2)
         //  result.reply.push({'link': 'http://www.example.com/'})
           console.log(result.reply)
