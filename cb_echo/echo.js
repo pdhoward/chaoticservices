@@ -77,7 +77,7 @@ function main(args) {
 //respond returns a string
 function respond(args, cb) {
   let i = args.machine.thisSlot
-   let reply = {'msg':'Agent ' + args.agent.name + ' Skill ' + args.agent.skills[1]. + ' Iteration ' + args.agent.iterations}
+   let reply = {'msg':'Agent ' + args.agent.name + ' Skill ' + args.agent.skills[1].skillname + ' Iteration ' + args.dialogue.sequenceCnt}
 
    cb(reply)
 
