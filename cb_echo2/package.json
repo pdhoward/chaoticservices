@@ -1,0 +1,13 @@
+{
+  "name": "echo2",
+  "version": "0.1.0",
+  "description": "A microservice test suite",
+  "scripts": {
+    "postinstall": "npm link serverless-openwhisk"
+  },
+  "author": "Patrick Howard",
+  "license": "MIT",
+  "dependencies": {
+    "greeting": "1.0.6"
+  }
+}
