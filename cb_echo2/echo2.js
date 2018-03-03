@@ -54,12 +54,16 @@ function main(args) {
           result.reply = []
           let msg1 = {"msg": "HELLO FROM ECHO 2"}
           result.reply.push(msg1)
-          let msg2 = {}
+          let msg2 = {"msg2":" Default Message  "}
           let nextSlot = args.machine.thisSlot + 1
+          console.log("next slot " + nextSlot)
+          console.log(msg2)
           if (nextSlot == args.agent.skills.length) {
-              msg2 = {"msg2":' Looks like this is the end of the conversation' }
+
+              msg2 = {"msg2":" Looks like this is the end of the conversation" }
             } else {
-              msg2 = {"msg2":' Looks like the skill is  ' + args.agent.skills[nextSlot].skillname}
+              console.log("MADE IT TO ELSE")
+              msg2 = {"msg2":" Looks like the skill is  " + args.agent.skills[nextSlot].skillname}
             }
           result.reply.push(msg2)
         //  result.reply.push({'link': 'http://www.example.com/'})
