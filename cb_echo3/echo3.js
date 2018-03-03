@@ -71,7 +71,7 @@ function main(args) {
         if (nextSlot == args.agent.skills.length) {
             msg2 = {"msg2":' Looks like this is the end of the conversation' }
           } else [
-            msg2 = {"msg2":' Looks like the skill is  ' + args.agent.skills[nextSlot]}
+            msg2 = {"msg2":' Looks like the skill is  ' + args.agent.skills[nextSlot].skillname}
           ]
         result.reply.push(msg2)
         //  result.reply.push({'link': 'http://www.example.com/'})
