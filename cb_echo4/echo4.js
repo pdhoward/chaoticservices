@@ -70,9 +70,9 @@ function main(args) {
         let nextSlot = args.machine.thisSlot + 1
         if (nextSlot == args.agent.skills.length) {
             msg2 = {"msg2":' Looks like this is the end of the conversation' }
-          } else [
+          } else {
             msg2 = {"msg2":' Looks like the skill is  ' + args.agent.skills[nextSlot].skillname}
-          ]
+          }
         result.reply.push(msg2)
         //  result.reply.push({'link': 'http://www.example.com/'})
           console.log(result.reply)
