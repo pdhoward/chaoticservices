@@ -62,6 +62,25 @@ function main(args) {
       respond(args, function(response) {
           let result = {};
           result.sender = 'echo';
+
+          // must be refactored -- part of constructor for production
+          delete args.orgmessage
+
+          ////////////////////////////////////////////////////////////////////////
+          // MORE FUTURES -- DYNAMIC ROUTING
+          // name a machine and state to execute n next click or immediately before return
+          result.machine.name = "testing echo "
+
+          // setting key status flags which drives routing -- on next click
+          result.status.isNewInteraction = false
+          result.status.isCallback = false
+          result.status.isTerminated = false
+          result.status.isError = false
+          result.status.isAuthenticated = false
+          result.status.isAuthorized = false
+          result.status.ErrorMsg = {msg: "no error - testing echo"}
+          //////////////////////////////////////////////////////////////////////////
+
           result.orgmessage = args;
           result.reply = []
           result.reply.push(response)

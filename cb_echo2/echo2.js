@@ -47,9 +47,12 @@ function main(args) {
   console.log(args)
 
   // compose response or redirect
-  return new Promise (function(resolve, reject){      
+  return new Promise (function(resolve, reject){
           let result = {};
           result.sender = 'echo2';
+
+          // must be refactored -- part of constructor
+          delete args.orgmessage
           result.orgmessage = args;
           result.reply = []
           let msg1 = {"msg": "HELLO FROM ECHO 2"}

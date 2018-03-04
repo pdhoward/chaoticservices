@@ -62,6 +62,9 @@ function main(args) {
 
         let result = {};
         result.sender = 'echo3';
+
+        // must be refactored -- part of constructor
+        delete args.orgmessage
         result.orgmessage = args;
         result.reply = []
         let msg1 = {"msg": "Hi there - echo 3 here"}
@@ -77,7 +80,7 @@ function main(args) {
         //  result.reply.push({'link': 'http://www.example.com/'})
           console.log(result.reply)
           resolve(result)
-    
+
     })
   };
 
