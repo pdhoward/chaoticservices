@@ -43,19 +43,7 @@ var visit = {
 
 function main(args) {
 
-  console.log("NEW ECHO 2 FUNCTION")
-
-  var text = "product";
-
-  // test for trigger words which redirect to another bot (microservice)
-  var trigger = triggerWords.find(function( item ) {
-      return text.match(item);
-    });
-
-  if (trigger !== undefined) {
-      visit.isTrigger = true;
-      visit.trigger = trigger;
-  }
+  console.log("NEW ECHO 3 FUNCTION")  
 
   // compose response or redirect
   return new Promise (function(resolve, reject){
