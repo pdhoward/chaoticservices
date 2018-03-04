@@ -44,6 +44,7 @@ var visit = {
 function main(args) {
 
   console.log("NEW ECHO 2 FUNCTION")
+  console.log(args)
 
   // compose response or redirect
   return new Promise (function(resolve, reject){
