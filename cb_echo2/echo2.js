@@ -47,8 +47,7 @@ function main(args) {
   console.log(args)
 
   // compose response or redirect
-  return new Promise (function(resolve, reject){
-      respond(args, function(response) {
+  return new Promise (function(resolve, reject){      
           let result = {};
           result.sender = 'echo2';
           result.orgmessage = args;
@@ -70,7 +69,7 @@ function main(args) {
         //  result.reply.push({'link': 'http://www.example.com/'})
           console.log(result.reply)
           resolve(result)
-      })
+
     })
   };
 
