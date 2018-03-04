@@ -69,6 +69,8 @@ function main(args) {
           ////////////////////////////////////////////////////////////////////////
           // MORE FUTURES -- DYNAMIC ROUTING
           // name a machine and state to execute n next click or immediately before return
+          result.machine = {}
+          result.status = {}
           result.machine.name = "testing echo "
 
           // setting key status flags which drives routing -- on next click
