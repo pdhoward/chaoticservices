@@ -43,6 +43,13 @@ var visit = {
 
 function main(args) {
 
+  console.log(args.getSender())
+  console.log(args.getMessage())
+  console.log(args.getMachineName())
+  console.log(args.getMachineSlot())
+  console.log(args.getDialogueCnt())
+
+
   console.log("NEW ECHO FUNCTION")
 
   var text = "product";
