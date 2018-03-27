@@ -41,7 +41,14 @@ var visit = {
 
 // NOTE -- etire interact object is being passed to the microservice
 
-function main(args) {
+function main(arg) {
+
+  let args = JSON.parse(arg)
+
+  console.log("A couple of tests")
+  console.log(args.message.Body)
+
+  console.log(typeof args.getSender)
 
   console.log(args.getSender())
   console.log(args.getMessage())
