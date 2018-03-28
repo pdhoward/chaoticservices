@@ -3,27 +3,7 @@
 //// constructor to instantiate key functions for microservices //
 /////////////////////////////////////////////////////////////////
 
-const request =                 require('request')
-const schema =                  require('schm')
-const methods =                 require('schm-methods')
-const {interactObject} =        require('../db/schemas/Interact')
 
-/*
-exports.microObject = schema(interactObject,
-        methods({
-            getSender: (values) => {return values.message.From},
-            getReceiver: (values) => {return values.message.To},
-            getMessage: (values) => {return values.message.Body},
-            getSenderCity: (values) => {return values.message.FromCity},
-            getSenderState: (values) => {return values.message.FromState},
-            getMachineName: (values) => {return values.machine.getMachineName},
-            getMachineSlot: (values) => {return values.machine.thisSlot},
-            getAgentName: (values) => {return values.agent.name},
-            getDialogueCnt: (values) => {return values.dialogue.sequenceCnt}
-      })
-    )
-*/
-exports.microObject = schema(interactObject)
 
 exports.Message = class Message {
 
