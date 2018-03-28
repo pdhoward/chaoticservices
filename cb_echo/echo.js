@@ -29,19 +29,11 @@ function main(str) {
           result.reply = []
           respond(args, (response) => {
             result.reply.concat(response)
+            console.log(result.reply)
+            resolve(result)
           })
 
-          let msg2 = {}
-          let nextSlot = args.machine.thisSlot + 1
-          if (nextSlot == args.agent.skills.length) {
-              msg2 = {"msg2":' Message ' + args.message.Body + ' This agent has nothing more to say' }
-            } else {
-              msg2 = {"msg2":' Message ' + args.message.Body + ' Next Skill ' + args.agent.skills[nextSlot].skillname}
-            }
-          result.reply.push(msg2)
-        //  result.reply.push({'link': 'http://www.example.com/'})
-          console.log(result.reply)
-          resolve(result)
+        //  result.reply.push({'link': 'http://www.example.com/'})        
 
     })
   };
