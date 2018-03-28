@@ -9,7 +9,7 @@ const s =                   require('serialijse')
 
 function main(str) {
 
-  let args = s.deserialize(args)
+  let args = s.deserialize(str)
   console.log("--------------micro test ---------------")
   console.log(args.sender)
   console.log(args.text)
