@@ -5,10 +5,11 @@
 var greeting =              require('greeting');
 const request =             require('request-promise');
 const s =                   require('serialijse')
+const {Message} =           require('./constructor')
 
-
-function main(str) {
-
+function main(obj) {
+  let str = obj.payload // pick up the serialized object from payload
+  s.declarePersistable(Message)
   let args = s.deserialize(str)
   console.log("--------------micro test ---------------")
   console.log(args.sender)
