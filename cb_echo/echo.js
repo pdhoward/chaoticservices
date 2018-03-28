@@ -33,7 +33,7 @@ function main(str) {
             resolve(result)
           })
 
-        //  result.reply.push({'link': 'http://www.example.com/'})        
+        //  result.reply.push({'link': 'http://www.example.com/'})
 
     })
   };
@@ -42,7 +42,7 @@ function main(str) {
 function respond(args, cb) {
   let interactions = ["Hey, I see this is your first text", "This is text number ", "Todays date is ", "You said "]
   let response = []
-  let msg {
+  let msg = {
     msg: ""
   }
 

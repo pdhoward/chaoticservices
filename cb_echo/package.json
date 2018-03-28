@@ -10,6 +10,5 @@
   "dependencies": {
     "greeting": "1.0.6",
     "serialijse": "0.1.3"
-
   }
 }
