@@ -2,8 +2,8 @@
 /////////          chaotic microservice                 ///////////
 ////////             echo and direct                 ///////////
 //////////////////////////////////////////////////////////////////
-var greeting =  require('greeting');
-const request = require('request-promise');
+var greeting =              require('greeting');
+const request =             require('request-promise');
 
 const REDIS_URI='redis-15416.c12.us-east-1-4.ec2.cloud.redislabs.com'
 const REDIS_PORT= '15146'
@@ -41,17 +41,10 @@ var visit = {
 
 // NOTE -- etire interact object is being passed to the microservice
 
-function main(arg) {
+function main(args) {
 
-  let args = JSON.parse(arg)
-  console.log("A couple of tests")
-  console.log(args.message.Body)
-
-  console.log(args.getSender())
-  console.log(args.getMessage())
-  console.log(args.getMachineName())
-  console.log(args.getMachineSlot())
-  console.log(args.getDialogueCnt())
+  console.log(">>>>>>>>>>>>>MEGATESTS<<<<<<<<<<<<<<<<")
+  //coming soon
 
 
   console.log("NEW ECHO FUNCTION")
