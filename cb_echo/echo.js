@@ -47,6 +47,7 @@ function respond(args, cb) {
   let msg = {
     msg: ""
   }
+  let newObj = {}
 
   let t = args.sequenceCnt
   console.log("inside of case switch")
@@ -62,23 +63,43 @@ function respond(args, cb) {
       cb(response)
       break;
     case 1:
-      msg.msg = interactions[2] + args.postdate
-      response.push(msg)
+      msg.msg = interactions[0]
+      newObj = Object.assign({}, msg)
+      response.push(newObj)
+      msg.msg = "The state of your inital interaction is " + args.statusInteraction
+      newObj = Object.assign({}, msg)
+      response.push(newObj)
       cb(response)
       break;
     case 2:
       msg.msg = interactions[3] + args.text
-      response.push(msg)
+      newObj = Object.assign({}, msg)
+      response.push(newObj)
       msg.msg = "Which is brilliant"
+      newObj = Object.assign({}, msg)
+      response.push(newObj)
+      cb(response)
+      break;
+    //
+    case 3:
+      msg.msg = interactions[1] + t + " which is a lot of texting"
+      response.push(msg)
+      cb(response)
+      break;
+    //
+    case 4:
+      msg.msg = interactions[2] + args.postdate
       response.push(msg)
       cb(response)
       break;
 
     default:
       msg.msg = interactions[1] + t
-      response.push(msg)
+      newObj = Object.assign({}, msg)
+      response.push(newObj)
       msg.msg = "When will this discussion end"
-      response.push(msg)
+      newObj = Object.assign({}, msg)
+      response.push(newObj)
       cb(response)
       break;
   }
