@@ -30,6 +30,7 @@ function main(obj) {
           result.reply = []
           respond(args, (response) => {
             result.reply.concat(response)
+            console.log(response)
             console.log(result.reply)
             resolve(result)
           })
@@ -48,7 +49,12 @@ function respond(args, cb) {
   }
 
   let t = args.sequenceCnt
-
+  console.log("inside of case switch")
+  console.log(t)
+  console.log(typeof t)
+  let v = args.dialogue.sequenceCnt
+  console.log(v)
+  console.log(typeof v)
   switch(t) {
     case 0:
       msg.msg = interactions[1] + t + " which seems a little low"
