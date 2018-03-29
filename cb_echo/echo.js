@@ -29,7 +29,7 @@ function main(obj) {
           ///////////////////////////////////
           result.reply = []
           respond(args, (response) => {
-            result.reply.concat(response)
+            result.reply = response.slice()
             console.log(response)
             console.log(result.reply)
             resolve(result)
