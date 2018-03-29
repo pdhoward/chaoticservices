@@ -52,26 +52,26 @@ function respond(args, cb) {
   console.log("inside of case switch")
   console.log(t)
   console.log(typeof t)
-  let v = args.dialogue.sequenceCnt
+  let v = args.obj.dialogue.sequenceCnt
   console.log(v)
   console.log(typeof v)
   switch(t) {
     case 0:
       msg.msg = interactions[1] + t + " which seems a little low"
       response.push(msg)
-
+      cb(response)
       break;
     case 1:
       msg.msg = interactions[2] + args.postdate
       response.push(msg)
-
+      cb(response)
       break;
     case 2:
       msg.msg = interactions[3] + args.text
       response.push(msg)
       msg.msg = "Which is brilliant"
       response.push(msg)
-
+      cb(response)
       break;
 
     default:
@@ -79,11 +79,9 @@ function respond(args, cb) {
       response.push(msg)
       msg.msg = "When will this discussion end"
       response.push(msg)
-
+      cb(response)
       break;
   }
-
-   cb(response)
 
 };
 
