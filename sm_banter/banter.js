@@ -50,12 +50,7 @@ function respond(args, cb) {
   let newObj = {}
 
   let t = args.sequenceCnt
-  console.log("inside of case switch")
-  console.log(t)
-  console.log(typeof t)
-  let v = args.obj.dialogue.sequenceCnt
-  console.log(v)
-  console.log(typeof v)
+  let v = args.obj.dialogue.sequenceCnt  
   switch(t) {
     case 0:
       msg.msg = interactions[1] + t + " which seems a little low"
