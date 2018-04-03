@@ -1,0 +1,14 @@
+{
+  "name": "echo",
+  "version": "0.1.0",
+  "description": "A microservice for echoing text, while listening for trigger words",
+  "scripts": {
+    "postinstall": "npm link serverless-openwhisk"
+  },
+  "author": "Patrick Howard",
+  "license": "MIT",
+  "dependencies": {
+    "greeting": "1.0.6",
+    "serialijse": "0.1.3"
+  }
+}
