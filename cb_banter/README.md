@@ -1,2 +1,2 @@
-# ChaoticBots Microservice
-echo for testing purposes
+# Microservice
+turing machine for the strategic machines platform
