@@ -11,7 +11,7 @@ provider:
 functions:
     banter:
       handler: agent.handler
-      name: sm_selltoys
+      name: sm_liverep
 
 # run npm install to download the provider plugin
 plugins:

@@ -1,7 +1,7 @@
 {
-  "name": "selltoys",
+  "name": "social",
   "version": "0.1.0",
-  "description": "Strategic Machines - selltoys agent",
+  "description": "Strategic Machines - Personality",
   "scripts": {
     "postinstall": "npm link serverless-openwhisk"
   },

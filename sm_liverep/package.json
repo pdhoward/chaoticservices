@@ -1,7 +1,7 @@
 {
-  "name": "selltoys",
+  "name": "liverep",
   "version": "0.1.0",
-  "description": "Strategic Machines - selltoys agent",
+  "description": "Strategic Machines - connect to live rep",
   "scripts": {
     "postinstall": "npm link serverless-openwhisk"
   },

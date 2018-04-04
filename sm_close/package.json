@@ -1,7 +1,7 @@
 {
-  "name": "selltoys",
+  "name": "close",
   "version": "0.1.0",
-  "description": "Strategic Machines - selltoys agent",
+  "description": "Strategic Machines - gentle close",
   "scripts": {
     "postinstall": "npm link serverless-openwhisk"
   },

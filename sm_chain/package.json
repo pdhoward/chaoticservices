@@ -1,7 +1,7 @@
 {
-  "name": "selltoys",
+  "name": "chain",
   "version": "0.1.0",
-  "description": "Strategic Machines - selltoys agent",
+  "description": "Strategic Machines - blockchain",
   "scripts": {
     "postinstall": "npm link serverless-openwhisk"
   },
