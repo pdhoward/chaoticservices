@@ -19,7 +19,7 @@ function main(obj) {
   console.log(args.senderName)
   console.log(args.text)
   console.log(args.sequenceCnt)
-
+  console.log(args.confidence)
 
   // compose response or redirect
   return new Promise (function(resolve, reject){
@@ -31,6 +31,16 @@ function main(obj) {
           result.orgmessage = args;
           ///////////////////////////////////
           result.reply = []
+
+          //
+          if (args.confidence < 70) {
+            wat(args, (response) => {
+              result.reply = response.slice()
+              console.log(response)
+              console.log(result.reply)
+              resolve(result)
+            })
+          }
           respond(args, (response) => {
             result.reply = response.slice()
             console.log(response)
@@ -103,6 +113,56 @@ function respond(args, cb) {
   }
 
 };
+//respond returns a string
+function wat(args, cb) {
+  let interactions = ["hmmm. I didn't understand that. Please try again", "I am here to talk about toys", "Wat? I am stumped. ", "You said "]
+  let response = []
+  let msg = {
+    msg: ""
+  }
+  let newObj = {}
 
+  let t = args.sequenceCnt
+  let v = args.obj.dialogue.sequenceCnt
+  switch(t) {
+    case 0:
+      msg.msg = "This is interaction " + t + " which seems a little low"
+      response.push(msg)
+      cb(response)
+      break;
+    case 1:
+      msg.msg = interactions[0]
+      newObj = Object.assign({}, msg)
+      response.push(newObj)
+      cb(response)
+      break;
+    case 2:
+      msg.msg = interactions[3] + args.text
+      newObj = Object.assign({}, msg)
+      response.push(newObj)
+      msg.msg = interactions[1]
+      newObj = Object.assign({}, msg)
+      response.push(newObj)
+      cb(response)
+      break;
+    //
+    case 3:
+      msg.msg = "This is interaction " + t + " Ask for my toy catalogue!"
+      response.push(msg)
+      cb(response)
+      break;
+
+    default:
+      msg.msg = interactions[2]
+      newObj = Object.assign({}, msg)
+      response.push(newObj)
+      msg.msg = interactions[3] + + args.text
+      newObj = Object.assign({}, msg)
+      response.push(newObj)
+      cb(response)
+      break;
+  }
+
+};
 
 exports.handler = main;
