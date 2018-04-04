@@ -8,15 +8,18 @@ const s =                   require('serialijse')
 const {Message} =           require('./constructor')
 
 function main(obj) {
+
+  // refactor this payload approach -- take a look at server code for better way
   let str = obj.payload // pick up the serialized object from payload
   s.declarePersistable(Message)
   let args = s.deserialize(str)
   console.log("--------------micro test ---------------")
+  // methods
   console.log(args.sender)
+  console.log(args.senderName)
   console.log(args.text)
   console.log(args.sequenceCnt)
-  console.log(args.postdate)
-  console.log(args.statusInteraction)
+
 
   // compose response or redirect
   return new Promise (function(resolve, reject){
@@ -50,7 +53,7 @@ function respond(args, cb) {
   let newObj = {}
 
   let t = args.sequenceCnt
-  let v = args.obj.dialogue.sequenceCnt  
+  let v = args.obj.dialogue.sequenceCnt
   switch(t) {
     case 0:
       msg.msg = interactions[1] + t + " which seems a little low"
