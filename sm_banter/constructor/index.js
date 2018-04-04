@@ -3,14 +3,12 @@
 //// constructor to instantiate key functions for microservices //
 /////////////////////////////////////////////////////////////////
 
-
-
 exports.Message = class Message {
 
   constructor(obj) {
     this.obj = obj
-  }
 
+  }
   get sender() {
     return this.obj.message.From
   }
@@ -26,10 +24,16 @@ exports.Message = class Message {
   get statusInteraction() {
     return this.obj.status.isNewInteraction
   }
-
+  get confidence(){
+    return this.obj.classifier.confidence
+  }
+  get senderName(){
+    return this.obj.member.firstname
+  }
+  get senderCity(){
+    return this.obj.member.city
+  }
 }
-
-
 ////////////////////////////////////////
 // future development footnote
 ///////////////////////////////////////
