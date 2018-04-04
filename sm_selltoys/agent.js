@@ -70,7 +70,7 @@ function respond(args, cb) {
   msg.msg = interactions[0]
   newObj = Object.assign({}, msg)
   response.push(newObj)
-  msg.msg = interactions[4]
+  msg.msg = interactions[1]
   newObj = Object.assign({}, msg)
   msg.msg="https://thetoyboat.com/collections/frontpage/products/nantucket-indian"
   newObj = Object.assign({}, msg)
