@@ -1,7 +1,7 @@
 {
-  "name": "echo",
+  "name": "banter",
   "version": "0.1.0",
-  "description": "A microservice for echoing text, while listening for trigger words",
+  "description": "Strategic Machines - banter agent",
   "scripts": {
     "postinstall": "npm link serverless-openwhisk"
   },

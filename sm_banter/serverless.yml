@@ -10,7 +10,7 @@ provider:
 
 functions:
     banter:
-      handler: handler.banter
+      handler: banter.handler
       name: sm_banter
 
 # run npm install to download the provider plugin

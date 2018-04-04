@@ -55,7 +55,13 @@ function main(obj) {
 
 //respond returns a string
 function respond(args, cb) {
-  let interactions = ["Hey, I see this is your first text", "This is text number ", "Todays date is ", "You said "]
+  let interactions = ["Hey, great to hear from you ",
+                      "This is text number ",
+                      "Todays date is ",
+                      "You said ",
+                      "I am here to sell you a toy. If you need to speak to a live agent, just say so",
+                      "Can I interest you in a toy? "]
+
   let response = []
   let msg = {
     msg: ""
@@ -71,10 +77,10 @@ function respond(args, cb) {
       cb(response)
       break;
     case 1:
-      msg.msg = interactions[0]
+      msg.msg = interactions[0] + args.senderName
       newObj = Object.assign({}, msg)
       response.push(newObj)
-      msg.msg = "The state of your inital interaction is " + args.statusInteraction
+      msg.msg = interactions[4]
       newObj = Object.assign({}, msg)
       response.push(newObj)
       cb(response)
@@ -83,7 +89,7 @@ function respond(args, cb) {
       msg.msg = interactions[3] + args.text
       newObj = Object.assign({}, msg)
       response.push(newObj)
-      msg.msg = "Which is brilliant"
+      msg.msg = interactions[5]
       newObj = Object.assign({}, msg)
       response.push(newObj)
       cb(response)
@@ -105,7 +111,7 @@ function respond(args, cb) {
       msg.msg = interactions[1] + t
       newObj = Object.assign({}, msg)
       response.push(newObj)
-      msg.msg = "When will this discussion end"
+      msg.msg = "When will this discussion end?"
       newObj = Object.assign({}, msg)
       response.push(newObj)
       cb(response)
