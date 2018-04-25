@@ -24,7 +24,7 @@ function main(obj) {
               console.log(response)
               console.log(result.reply)
               o.updateWorkObj(result)
-              resolve(o)
+              resolve(o.getWorkObj())
             })
 
           })
