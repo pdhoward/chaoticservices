@@ -2,47 +2,39 @@
 /////////          chaotic microservice                 ///////////
 ////////             echo and direct                 ///////////
 //////////////////////////////////////////////////////////////////
-var greeting =              require('greeting');
-const request =             require('request-promise');
-const {connect} =           require('../constructortest')
+const greeting =              require('greeting');
+const request =               require('request-promise');
+const {connect} =             require('../constructortest')
 
 function main(obj) {
-
-  console.log("---------MACHINE TEST----------")
-  
-
 
   // compose response or redirect
   return new Promise (function(resolve, reject){
           let result = {};
-          result.sender = args.sender;
-
-          // must be refactored -- part of constructor for production
-          delete args.orgmessage
-          result.orgmessage = args;
-          ///////////////////////////////////
-          result.reply = []
-
-          //
-          if (args.confidence < 70) {
-            wat(args, (response) => {
+          console.log("---------MACHINE TEST----------")
+          connect()
+            .then((o) => {
+              o.updateWorkObj(obj)
+              let args = o.getWorkObj()
+              result.sender = args.message.From;
+              ///////////////////////////////////
+              result.reply = []
+              wat(args, (response) => {
               result.reply = response.slice()
               console.log(response)
               console.log(result.reply)
-              resolve(result)
+              o.updateWorkObj(result)
+              resolve(o)
             })
-          }
-          respond(args, (response) => {
-            result.reply = response.slice()
-            console.log(response)
-            console.log(result.reply)
-            resolve(result)
+
           })
-
+             .catch((e) => {
+                console.log("Experiment failed")
+                console.log(e)
+          })
         //  result.reply.push({'link': 'http://www.example.com/'})
-
     })
-  };
+  }
 
 //respond returns a string
 function respond(args, cb) {
