@@ -31,6 +31,7 @@ function main(obj) {
              .catch((e) => {
                 console.log("Experiment failed")
                 console.log(e)
+                reject(e)
           })
         //  result.reply.push({'link': 'http://www.example.com/'})
     })
@@ -51,8 +52,10 @@ function respond(args, cb) {
   }
   let newObj = {}
 
-  let t = args.sequenceCnt
-  let v = args.obj.dialogue.sequenceCnt
+  //let t = args.sequenceCnt
+  //let v = args.obj.dialogue.sequenceCnt
+  let t = 2
+  let v = 1
   switch(t) {
     case 0:
       msg.msg = interactions[1] + t + " which seems a little low"
@@ -60,7 +63,7 @@ function respond(args, cb) {
       cb(response)
       break;
     case 1:
-      msg.msg = interactions[0] + args.senderName
+      msg.msg = interactions[0] + "Guest"
       newObj = Object.assign({}, msg)
       response.push(newObj)
       msg.msg = interactions[4]
@@ -69,7 +72,7 @@ function respond(args, cb) {
       cb(response)
       break;
     case 2:
-      msg.msg = interactions[3] + args.text
+      msg.msg = interactions[3] + "Default for right testing"
       newObj = Object.assign({}, msg)
       response.push(newObj)
       msg.msg = interactions[5]
@@ -110,9 +113,11 @@ function wat(args, cb) {
     msg: ""
   }
   let newObj = {}
-
-  let t = args.sequenceCnt
-  let v = args.obj.dialogue.sequenceCnt
+  // TESTING - TEMPORARY VALUES
+  //let t = args.sequenceCnt
+  //let v = args.obj.dialogue.sequenceCnt
+  let t = 2
+  let v = 1
   switch(t) {
     case 0:
       msg.msg = "This is interaction " + t + " which seems a little low"
@@ -126,7 +131,7 @@ function wat(args, cb) {
       cb(response)
       break;
     case 2:
-      msg.msg = interactions[3] + args.text
+      msg.msg = interactions[3] + args.message.Body
       newObj = Object.assign({}, msg)
       response.push(newObj)
       msg.msg = interactions[1]
