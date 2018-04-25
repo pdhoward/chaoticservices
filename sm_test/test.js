@@ -4,22 +4,13 @@
 //////////////////////////////////////////////////////////////////
 var greeting =              require('greeting');
 const request =             require('request-promise');
-const s =                   require('serialijse')
-const {Message} =           require('./constructor')
+const {connect} =           require('../constructortest')
 
 function main(obj) {
 
-  // refactor this payload approach -- take a look at server code for better way
-  let str = obj.payload // pick up the serialized object from payload
-  s.declarePersistable(Message)
-  let args = s.deserialize(str)
-  console.log("--------------micro test ---------------")
-  // methods
-  console.log(args.sender)
-  console.log(args.senderName)
-  console.log(args.text)
-  console.log(args.sequenceCnt)
-  console.log(args.confidence)
+  console.log("---------MACHINE TEST----------")
+  
+
 
   // compose response or redirect
   return new Promise (function(resolve, reject){

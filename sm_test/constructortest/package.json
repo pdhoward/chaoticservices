@@ -1,0 +1,32 @@
+{
+  "name": "messagemachine",
+  "version": "0.5.0",
+  "description": "Strtageic Machines Message Object",
+  "main": "server.js",
+  "engines": {
+    "node": "^8.6.0",
+    "npm": "^3.0.0"
+  },
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pdhoward/scriptxio.git"
+  },
+  "author": "xio",
+  "license": "MIT",
+  "homepage": "http://www.xiollc.com",
+  "bugs": {},
+  "keywords": [
+    "strategic machines",
+    "react, node",
+    "sms",
+    "messaging",
+    "ai",
+    "ml",
+    "cui",
+    "conversational economy"
+  ],
+  "dependencies": {    
+  },
+  "devDependencies": {}
+}
