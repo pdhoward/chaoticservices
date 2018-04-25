@@ -4,7 +4,7 @@
 //////////////////////////////////////////////////////////////////
 const greeting =              require('greeting');
 const request =               require('request-promise');
-const {connect} =             require('../constructortest')
+const {connect} =             require('./constructortest')
 
 function main(obj) {
 

@@ -4,8 +4,8 @@
 //// constructor to instantiate key functions for microservices //
 /////////////////////////////////////////////////////////////////
 
-const db =                    require('../api/db')
-const { g, b, gr, r, y } =    require('../console')
+const db =                    require('./db')
+//const { g, b, gr, r, y } =    require('../console')
 
 
 // factory function, that holds an open connection to the db,
@@ -43,7 +43,7 @@ const repository = () => {
     conn = connection
 
     conn.on('close', () => {
-      console.log(b('Experiment - connection closed...'))
+      console.log('Experiment - connection closed...')
     })
 
     return
