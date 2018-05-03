@@ -127,8 +127,8 @@ const repository = () => {
   }
   // merge agent replies with any system replies that may have been captured
   const setAgentReply = (resp) => {
-    console.log(r("-----------DEBUG--------------"))
-    console.log(resp)
+    //console.log(r("-----------DEBUG--------------"))
+    //console.log(resp)
     workObj.response.sender = resp.sender
     workObj.response.orgmessage = resp.orgmessage
     workObj.response.reply = [...workObj.response.reply, ...resp.reply]

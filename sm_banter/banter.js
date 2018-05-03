@@ -11,21 +11,26 @@ function main(obj) {
   // compose response or redirect
   return new Promise (function(resolve, reject){
           let result = {};
-          console.log("---------MACHINE TEST----------")
+          console.log("---------Banter----------")
           machine()
             .then((o) => {
+              // active the object with data
               o.updateWorkObj(obj)
+              // grab a copy of the validated data object
               let args = o.getWorkObj()
+              // begin to construct the response object
               result.sender = args.message.From
-              result.orgmessage = obj
-              ///////////////////////////////////
+              result.orgmessage = args
+              // get the agent response
               result.reply = []
+
               wat(args, (response) => {
-              result.reply = response.slice()
-              console.log(result.reply)
-              o.setAgentReply(result)
-              resolve(o.getWorkObj())
-            })
+                  result.reply = response.slice()
+                  console.log(result)
+                  o.setAgentReply(result)
+                  resolve(o.getWorkObj())
+                  return
+              })
 
           })
              .catch((e) => {
