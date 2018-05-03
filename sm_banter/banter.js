@@ -16,14 +16,14 @@ function main(obj) {
             .then((o) => {
               o.updateWorkObj(obj)
               let args = o.getWorkObj()
-              result.sender = args.message.From;
+              result.sender = args.message.From
+              result.orgmessage = obj
               ///////////////////////////////////
               result.reply = []
               wat(args, (response) => {
               result.reply = response.slice()
-              console.log(response)
               console.log(result.reply)
-              o.updateWorkObj(result)
+              o.setAgentReply(result)
               resolve(o.getWorkObj())
             })
 
