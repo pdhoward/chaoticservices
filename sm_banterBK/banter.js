@@ -2,40 +2,56 @@
 /////////          chaotic microservice                 ///////////
 ////////             echo and direct                 ///////////
 //////////////////////////////////////////////////////////////////
-const greeting =              require('greeting');
-const request =               require('request-promise');
-const {connect} =             require('./constructortest')
+var greeting =              require('greeting');
+const request =             require('request-promise');
+const s =                   require('serialijse')
+const {Message} =           require('./constructor')
 
 function main(obj) {
+
+  // refactor this payload approach -- take a look at server code for better way
+  let str = obj.payload // pick up the serialized object from payload
+  s.declarePersistable(Message)
+  let args = s.deserialize(str)
+  console.log("--------------micro test ---------------")
+  // methods
+  console.log(args.sender)
+  console.log(args.senderName)
+  console.log(args.text)
+  console.log(args.sequenceCnt)
+  console.log(args.confidence)
 
   // compose response or redirect
   return new Promise (function(resolve, reject){
           let result = {};
-          console.log("---------MACHINE TEST----------")
-          connect()
-            .then((o) => {
-              o.updateWorkObj(obj)
-              let args = o.getWorkObj()
-              result.sender = args.message.From;
-              ///////////////////////////////////
-              result.reply = []
-              wat(args, (response) => {
+          result.sender = args.sender;
+
+          // must be refactored -- part of constructor for production
+          delete args.orgmessage
+          result.orgmessage = args;
+          ///////////////////////////////////
+          result.reply = []
+
+          //
+          if (args.confidence < 70) {
+            wat(args, (response) => {
               result.reply = response.slice()
               console.log(response)
               console.log(result.reply)
-              o.updateWorkObj(result)
-              resolve(o.getWorkObj())
+              resolve(result)
             })
+          }
+          respond(args, (response) => {
+            result.reply = response.slice()
+            console.log(response)
+            console.log(result.reply)
+            resolve(result)
+          })
 
-          })
-             .catch((e) => {
-                console.log("Experiment failed")
-                console.log(e)
-                reject(e)
-          })
         //  result.reply.push({'link': 'http://www.example.com/'})
+
     })
-  }
+  };
 
 //respond returns a string
 function respond(args, cb) {
@@ -52,10 +68,8 @@ function respond(args, cb) {
   }
   let newObj = {}
 
-  //let t = args.sequenceCnt
-  //let v = args.obj.dialogue.sequenceCnt
-  let t = 2
-  let v = 1
+  let t = args.sequenceCnt
+  let v = args.obj.dialogue.sequenceCnt
   switch(t) {
     case 0:
       msg.msg = interactions[1] + t + " which seems a little low"
@@ -63,7 +77,7 @@ function respond(args, cb) {
       cb(response)
       break;
     case 1:
-      msg.msg = interactions[0] + "Guest"
+      msg.msg = interactions[0] + args.senderName
       newObj = Object.assign({}, msg)
       response.push(newObj)
       msg.msg = interactions[4]
@@ -72,7 +86,7 @@ function respond(args, cb) {
       cb(response)
       break;
     case 2:
-      msg.msg = interactions[3] + "Default for right testing"
+      msg.msg = interactions[3] + args.text
       newObj = Object.assign({}, msg)
       response.push(newObj)
       msg.msg = interactions[5]
@@ -113,11 +127,9 @@ function wat(args, cb) {
     msg: ""
   }
   let newObj = {}
-  // TESTING - TEMPORARY VALUES
-  //let t = args.sequenceCnt
-  //let v = args.obj.dialogue.sequenceCnt
-  let t = 2
-  let v = 1
+
+  let t = args.sequenceCnt
+  let v = args.obj.dialogue.sequenceCnt
   switch(t) {
     case 0:
       msg.msg = "This is interaction " + t + " which seems a little low"
@@ -131,7 +143,7 @@ function wat(args, cb) {
       cb(response)
       break;
     case 2:
-      msg.msg = interactions[3] + args.message.Body
+      msg.msg = interactions[3] + args.text
       newObj = Object.assign({}, msg)
       response.push(newObj)
       msg.msg = interactions[1]

@@ -1,14 +1,13 @@
 {
-  "name": "banter",
+  "name": "test",
   "version": "0.1.0",
-  "description": "Strategic Machines - banter agent",
+  "description": "Strategic Machines - test agent",
   "scripts": {
     "postinstall": "npm link serverless-openwhisk"
   },
   "author": "Patrick Howard",
   "license": "MIT",
   "dependencies": {
-    "greeting": "1.0.6",
-    "serialijse": "0.1.3"
+    "greeting": "1.0.6"
   }
 }

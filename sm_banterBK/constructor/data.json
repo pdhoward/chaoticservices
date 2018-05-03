@@ -1,6 +1,4 @@
-
 {
-  "description": "sample data object as of 3-29-18",
  "message": {
         "PostDate": {
             "$date": "2018-03-20T19:39:16.253Z"
