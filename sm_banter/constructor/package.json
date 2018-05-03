@@ -28,7 +28,8 @@
   ],
   "dependencies": {
     "chalk": "1.1.3",
-    "dayjs": "^1.5.0",
+    "dayjs": "^1.5.18",
+    "mongoose": "^5.0.0",
     "request": "2.83.0",
     "valid-url": "1.0.9",
     "watson-developer-cloud": "3.0.2"
