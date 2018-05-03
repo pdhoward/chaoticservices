@@ -27,8 +27,11 @@
     "conversational economy"
   ],
   "dependencies": {
+    "chalk": "1.1.3",
     "dayjs": "^1.5.0",
-    "valid-url": "1.0.9"
+    "request": "2.83.0",
+    "valid-url": "1.0.9",
+    "watson-developer-cloud": "3.0.2"
   },
   "devDependencies": {}
 }

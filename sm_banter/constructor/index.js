@@ -6,11 +6,11 @@
 /////////////////////////////////////////////////////////////////
 const Classifier =            require('watson-developer-cloud/natural-language-classifier/v1')
 const dayjs =                 require('dayjs')
-const errMsg =                require('../config').error()
-const db =                    require('../api/db')
-const http =                  require('../api/http')
+const errMsg =                require('./config').error()
+const db =                    require('./api/db')
+const http =                  require('./api/http')
 const {isNull} =              require('./utils')
-const { g, b, gr, r, y } =    require('../console')
+const { g, b, gr, r, y } =    require('./console')
 
 // factory function, that holds an open connection to the db,
 // and exposes function for low latency message processing
