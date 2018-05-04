@@ -27,12 +27,13 @@ function main(obj) {
               wat(args, (response) => {
                   result.reply = response.slice()
                   console.log(result)
-                  o.setAgentReply(result)
-                  resolve(o.getWorkObj())
-                  return
+                  //o.setAgentReply(result)
+                  //let newObj = o.getWorkObj()
+                  resolve(result)
+                  //return
               })
 
-          })
+            })
              .catch((e) => {
                 console.log("Experiment failed")
                 console.log(e)
