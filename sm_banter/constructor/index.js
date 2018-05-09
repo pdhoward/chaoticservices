@@ -5,15 +5,17 @@
 ///////////         machine constructor    c2017    //////////////
 /////////////////////////////////////////////////////////////////
 const Classifier =            require('watson-developer-cloud/natural-language-classifier/v1')
+const clone =                 require('clone-deep')
 const dayjs =                 require('dayjs')
-const errMsg =                require('./config').error()
-const db =                    require('./api/db')
-const http =                  require('./api/http')
+const errMsg =                require('../config').error()
+const db =                    require('../api/db')
+const http =                  require('../api/http')
 const {isNull} =              require('./utils')
-const { g, b, gr, r, y } =    require('./console')
+const { g, b, gr, r, y } =    require('../console')
 
 // factory function, that holds an open connection to the db,
 // and exposes function for low latency message processing
+
 const repository = () => {
 
   // workobject is updated by stage
@@ -92,9 +94,13 @@ const repository = () => {
   /////   workObject functons     ///////
   //////////////////////////////////////
   const updateWorkObj = (obj) => {
-    console.log("entered set workobj")
-    //console.log(obj)
     workObj = { ...workObj, ...obj }
+    return
+  }
+
+  const setModelObj = (obj) => {
+    workObj = clone(obj)                // make a copy without protypal reference
+    return
   }
 
   const getWorkObj = () => {
@@ -118,7 +124,7 @@ const repository = () => {
     return
   }
   const updateMeter = (resp) => {
-    work.meter = resp
+    workObj.meter = resp
     return
   }
   const setReply = (resp) => {
@@ -127,8 +133,6 @@ const repository = () => {
   }
   // merge agent replies with any system replies that may have been captured
   const setAgentReply = (resp) => {
-    //console.log(r("-----------DEBUG--------------"))
-    //console.log(resp)
     workObj.response.sender = resp.sender
     workObj.response.orgmessage = resp.orgmessage
     workObj.response.reply = [...workObj.response.reply, ...resp.reply]
@@ -236,13 +240,20 @@ const repository = () => {
   ///////////////////////////////////////////////////
   /////   evaluate and set state of dialogue ///////
   /////////////////////////////////////////////////
-  const setContext = (last) => {
-    console.log("entered set context in state stage")
+  const setContext = (last) => {    
     return new Promise((resolve, reject) => {
 
     // if no interaction was found
     if (isNull(last)) {
       console.log(r("setcontext --- step 1"))
+      resetStatus()
+      setNewDialogue()
+      resolve(getStatus())
+      return
+    }
+
+    if (last.status.isTerminated) {
+      console.log(r("setcontext --- step 1 1/2"))
       resetStatus()
       setNewDialogue()
       resolve(getStatus())
@@ -349,7 +360,6 @@ const repository = () => {
   /////   connection              ///////
   //////////////////////////////////////
   const setConnection = (connection) => {
-    console.log("Entered Set Connection")
     conn = connection
 
     conn.on('close', () => {
@@ -399,6 +409,7 @@ const repository = () => {
     setMember,
     setMessage,
     setMeter,
+    setModelObj,
     setPostdate,
     setReply,
     setWatsonClassification,
