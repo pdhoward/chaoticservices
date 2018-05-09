@@ -1,0 +1,26 @@
+[
+	{
+		"name": "xio",
+		"description": "Platform owner - test database holding client collections ",
+		"location": "urbancoder account",
+		"db": "machines",
+		"uri": "mongodb://localhost:27017/",
+		"uriremote": "mongodb://machina:Charl0tte@ds247619.mlab.com:47619/",
+		"username": "machina",
+		"password": "Charl0tte",
+		"webpassword": "demo",
+		"isLive": false
+	},
+	{
+		"name": "xio",
+		"description": "Platform owner - production db holding client collections",
+		"location": "urbancoder account",
+		"db": "machines",
+		"uri": "mongodb://machina:Charl0tte@ds247619.mlab.com:47619/",
+		"username": "machina",
+		"password": "Charl0tte",
+		"webpassword": "demo",
+		"isLive": true
+	}
+
+]

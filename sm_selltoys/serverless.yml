@@ -5,6 +5,7 @@ service: sm
 
 provider:
   name: openwhisk
+  runtime: nodejs:8
   memorySize: 256 # optional, default is 256
   timeout: 5 # optional, default is 60
 
