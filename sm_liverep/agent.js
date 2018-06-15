@@ -4,20 +4,19 @@
 //////////////////////////////////////////////////////////////////
 const greeting =              require('greeting');
 const request =               require('request-promise');
-const {machine} =             require('./constructor')
+const {createMachine} =       require('@xmachina/message')
 
 function main(obj) {
 
   // compose response or redirect
   return new Promise (function(resolve, reject){
           let result = {};
-          console.log("---------Banter----------")
-          machine()
-            .then((o) => {
-              // active the object with data
-              o.updateWorkObj(obj)
-              // grab a copy of the validated data object
-              let args = o.getWorkObj()
+          console.log("---------Live Rep---------")
+          const m = createMachine()
+
+          m.updateWorkObj(obj)         // intialize work object with schema model
+
+          let args = m.getWorkObj()
               // begin to construct the response object
               result.sender = args.message.From
               result.orgmessage = args
@@ -26,19 +25,12 @@ function main(obj) {
 
               respond(args, (response) => {
                   result.reply = response.slice()
-                  console.log(result)
-                  //o.setAgentReply(result)
-                  //let newObj = o.getWorkObj()
-                  resolve(result)
+                  m.setAgentReply(result)
+                  let newObj = m.getWorkObj()
+                  resolve(newObj)
                   //return
               })
 
-            })
-             .catch((e) => {
-                console.log("Experiment failed")
-                console.log(e)
-                reject(e)
-          })
         //  result.reply.push({'link': 'http://www.example.com/'})
     })
   }

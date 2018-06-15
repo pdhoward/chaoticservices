@@ -8,6 +8,7 @@
   "author": "Patrick Howard",
   "license": "MIT",
   "dependencies": {
-    "greeting": "1.0.6"
+    "greeting": "1.0.6",
+    "@xmachina/message": "^1.0.1"
   }
 }
