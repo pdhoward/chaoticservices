@@ -26,7 +26,7 @@ function main(obj) {
 
               respond(args, (response) => {
                   result.reply = response.slice()
-                  m.setAgentReply(result)
+                  m.setResponse(result)
                   let newObj = m.getWorkObj()
                   resolve(newObj)
                   //return
